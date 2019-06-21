@@ -26,6 +26,7 @@ The tests that run against the API server live in `automation-tests/src/integrat
 ```
 Run uk.co.baconi.playground.automation.users.GetUsersIT
 Run uk.co.baconi.playground.automation.users.CreateUserIT
+Run uk.co.baconi.playground.automation.users.GetUsersByNameIT
 ```
 * via command line
 ```bash
