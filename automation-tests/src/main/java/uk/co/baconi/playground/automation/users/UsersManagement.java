@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.co.baconi.playground.automation.ConnectionSupplier;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import static org.assertj.db.api.Assertions.assertThat;
 
@@ -81,7 +84,7 @@ class UsersManagement {
 
         try (final Connection connection = connectionSupplier.get()) {
 
-            try(final PreparedStatement statement = deleteUserByName(connection)) {
+            try (final PreparedStatement statement = deleteUserByName(connection)) {
                 statement.setString(1, name);
                 statement.execute();
 
@@ -97,7 +100,7 @@ class UsersManagement {
 
         try (final Connection connection = connectionSupplier.get()) {
 
-            try(final PreparedStatement statement = deleteUserById(connection)) {
+            try (final PreparedStatement statement = deleteUserById(connection)) {
                 statement.setInt(1, id);
                 statement.execute();
 
@@ -113,12 +116,12 @@ class UsersManagement {
 
         try (final Connection connection = connectionSupplier.get()) {
 
-            try(final PreparedStatement statement = insertUser(connection)) {
+            try (final PreparedStatement statement = insertUser(connection)) {
                 statement.setString(1, name);
                 statement.setString(2, email);
                 statement.executeUpdate();
 
-                try(final ResultSet resultSet = statement.getGeneratedKeys()) {
+                try (final ResultSet resultSet = statement.getGeneratedKeys()) {
                     resultSet.next();
                     return resultSet.getInt("id");
                 }

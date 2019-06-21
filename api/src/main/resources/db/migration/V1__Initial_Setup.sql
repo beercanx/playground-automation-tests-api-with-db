@@ -7,4 +7,5 @@ CREATE TABLE user
 );
 
 -- Create an example user
-INSERT INTO user (name, email) VALUES ('Aardvark', 'aardvark@animals.co.uk');
+INSERT INTO user (name, email)
+VALUES ('Aardvark', 'aardvark@animals.co.uk');

@@ -50,14 +50,12 @@ class CreateUsersIT {
 
         final int id = response.extract().body().path("id");
 
-        // TODO - Assert that the user appears in the database
         assertThat(usersManagement.findUserById(id))
                 .hasNumberOfRows(1)
                 .row()
                 .value("id").isEqualTo(id)
                 .value("name").isEqualTo("badger")
                 .value("email").isEqualTo("mash.potatoes@bodger.com");
-
     }
 
     @AfterEach
