@@ -1,24 +1,25 @@
 package uk.co.baconi.playground.automation.users;
 
 import io.restassured.http.ContentType;
+import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import uk.co.baconi.playground.automation.IntegrationTestProperties;
+import uk.co.baconi.playground.automation.ApiProperties;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
+@AllArgsConstructor(onConstructor_ = {@Autowired})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class GetUsersIT {
+class GetUsersIT {
 
-    @Autowired
-    private IntegrationTestProperties properties;
+    private final ApiProperties properties;
 
     @Test
     @DisplayName("GET /user should return 200 with expected users")
-    public void getUserReturns200WithExpectedUsers() {
+    void getUserReturns200WithExpectedUsers() {
         given().baseUri(properties.getUrl())
                 .get("/user")
                 .then()
@@ -32,5 +33,4 @@ public class GetUsersIT {
                         "[0].email", equalTo("aardvark@animals.co.uk")
                 );
     }
-
 }

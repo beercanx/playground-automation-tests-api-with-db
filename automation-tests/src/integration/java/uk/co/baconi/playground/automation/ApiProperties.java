@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 @Getter
 @Component
 @ConfigurationProperties(prefix = "automation.api")
-public class IntegrationTestProperties {
+public class ApiProperties {
     private String url;
 }

@@ -1,28 +1,28 @@
 package uk.co.baconi.playground.automation.users;
 
 import io.restassured.http.ContentType;
+import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import uk.co.baconi.playground.automation.IntegrationTestProperties;
+import uk.co.baconi.playground.automation.ApiProperties;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
 
+@AllArgsConstructor(onConstructor_ = {@Autowired})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class CreateUsersIT {
+class CreateUsersIT {
 
-    @Autowired
-    private IntegrationTestProperties properties;
+    private final ApiProperties properties;
 
     @Test
     @DisplayName("POST /user should return 201 with expected user")
-    public void createUserReturns201WithExpectedUser() {
+    void createUserReturns201WithExpectedUser() {
 
         final Map<String, String> newUser = new HashMap<>();
         newUser.put("name", "badger");
@@ -46,5 +46,4 @@ public class CreateUsersIT {
 
         // TODO - Create tear down to delete User
     }
-
 }
