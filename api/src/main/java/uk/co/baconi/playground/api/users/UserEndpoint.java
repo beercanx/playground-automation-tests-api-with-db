@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -28,7 +25,11 @@ public class UserEndpoint {
 
         log.info("GET /user");
 
-        return ResponseEntity.ok(userRepository.findAll());
+        final var users = userRepository.findAll();
+
+        log.info("Found users: {}", users);
+
+        return ResponseEntity.ok(users);
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -41,5 +42,17 @@ public class UserEndpoint {
         log.info("Created user: {}", user);
 
         return ResponseEntity.created(URI.create("/user")).body(user);
+    }
+
+    @RequestMapping(path = "/by-name/{name}", method = RequestMethod.GET)
+    public ResponseEntity<Iterable<User>> byName(@PathVariable String name) {
+
+        log.info("GET /by-name/{}", name);
+
+        final var users = userRepository.findByName(name);
+
+        log.info("Found users: {}", users);
+
+        return ResponseEntity.ok(users);
     }
 }
