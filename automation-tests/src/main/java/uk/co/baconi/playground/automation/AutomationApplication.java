@@ -1,6 +1,7 @@
 package uk.co.baconi.playground.automation;
 
-import org.assertj.db.type.Source;
+import org.assertj.db.type.AssertDbConnection;
+import org.assertj.db.type.AssertDbConnectionFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
@@ -15,7 +16,7 @@ public class AutomationApplication {
     }
 
     @Bean
-    public Source createDatabaseSource(final DatabaseProperties properties) {
-        return new Source(properties.getUrl(), properties.getUser(), properties.getPassword());
+    public AssertDbConnection createDatabaseSource(final DatabaseProperties properties) {
+        return AssertDbConnectionFactory.of(properties.getUrl(), properties.getUser(), properties.getPassword()).create();
     }
 }

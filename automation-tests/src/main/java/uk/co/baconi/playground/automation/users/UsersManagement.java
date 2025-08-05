@@ -3,8 +3,8 @@ package uk.co.baconi.playground.automation.users;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
+import org.assertj.db.type.AssertDbConnection;
 import org.assertj.db.type.Request;
-import org.assertj.db.type.Source;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.co.baconi.playground.automation.ConnectionSupplier;
@@ -21,17 +21,17 @@ import static org.assertj.db.api.Assertions.assertThat;
 @AllArgsConstructor(onConstructor_ = {@Autowired})
 class UsersManagement {
 
-    private final Source source;
+    private final AssertDbConnection source;
     private final ConnectionSupplier connectionSupplier;
 
     Request findUserById(final int id) {
-        return new Request(source, """
-                SELECT "id", "name", "email" FROM "user" WHERE "id" = ?;""", id);
+        return source.request("""
+                SELECT "id", "name", "email" FROM "user" WHERE "id" = ?;""").parameters(id).build();
     }
 
     Request findUserByName(final String name) {
-        return new Request(source, """
-                SELECT "id", "name", "email" FROM "user" WHERE "name" = ?;""", name);
+        return source.request("""
+                SELECT "id", "name", "email" FROM "user" WHERE "name" = ?;""").parameters(name).build();
     }
 
     TestUser createUser(final String name, final String email) throws SQLException {
