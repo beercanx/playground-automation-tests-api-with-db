@@ -25,11 +25,13 @@ class UsersManagement {
     private final ConnectionSupplier connectionSupplier;
 
     Request findUserById(final int id) {
-        return new Request(source, "SELECT id, name, email FROM user WHERE id = ?;", id);
+        return new Request(source, """
+                SELECT "id", "name", "email" FROM "user" WHERE "id" = ?;""", id);
     }
 
     Request findUserByName(final String name) {
-        return new Request(source, "SELECT id, name, email FROM user WHERE name = ?;", name);
+        return new Request(source, """
+                SELECT "id", "name", "email" FROM "user" WHERE "name" = ?;""", name);
     }
 
     TestUser createUser(final String name, final String email) throws SQLException {
@@ -130,14 +132,17 @@ class UsersManagement {
     }
 
     private PreparedStatement insertUser(final Connection connection) throws SQLException {
-        return connection.prepareStatement("INSERT INTO USER (name, email) VALUES ( ?, ? );", new String[]{"id"});
+        return connection.prepareStatement("""
+                INSERT INTO "user" ("name", "email") VALUES ( ?, ? );""", new String[]{"id"});
     }
 
     private PreparedStatement deleteUserById(final Connection connection) throws SQLException {
-        return connection.prepareStatement("DELETE FROM USER WHERE ID = ? LIMIT 1;");
+        return connection.prepareStatement("""
+                DELETE FROM "user" WHERE "id" = ? LIMIT 1;""");
     }
 
     private PreparedStatement deleteUserByName(final Connection connection) throws SQLException {
-        return connection.prepareStatement("DELETE FROM USER WHERE NAME = ? LIMIT 1;");
+        return connection.prepareStatement("""
+                DELETE FROM "user" WHERE "name" = ? LIMIT 1;""");
     }
 }
