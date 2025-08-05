@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @ToString
 @AllArgsConstructor
-class NewUser {
+public class NewUser {
 
     @Valid
     @NotNull
