@@ -8,19 +8,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.net.URI;
 
 @Slf4j
 @Validated
 @RestController
 @AllArgsConstructor(onConstructor_ = {@Autowired})
-@RequestMapping(value = "/user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserEndpoint {
 
     private final UserRepository userRepository;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public ResponseEntity<Iterable<User>> get() {
 
         log.info("GET /user");
@@ -32,7 +32,7 @@ public class UserEndpoint {
         return ResponseEntity.ok(users);
     }
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping( consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> create(@Valid @RequestBody final NewUser newUser) {
 
         log.info("POST /user - {}", newUser);
@@ -44,7 +44,7 @@ public class UserEndpoint {
         return ResponseEntity.created(URI.create("/user")).body(user);
     }
 
-    @RequestMapping(path = "/by-name/{name}", method = RequestMethod.GET)
+    @GetMapping("/by-name/{name}")
     public ResponseEntity<Iterable<User>> byName(@PathVariable String name) {
 
         log.info("GET /by-name/{}", name);
