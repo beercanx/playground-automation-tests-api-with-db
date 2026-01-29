@@ -13,7 +13,7 @@
 
     <modules>
         <module>api</module>
-         <module>automation-tests</module>
+        <module>automation-tests</module>
     </modules>
 
     <description>Playground project for automation tests for an API with a database.</description>
@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.1</version>
+        <version>4.0.2</version>
     </parent>
 
     <licenses>
