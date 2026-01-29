@@ -74,7 +74,6 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.27.7</version> <!-- Security patching 3.27.6 from spring-boot-starter-test -->
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
