@@ -42,7 +42,7 @@
             <dependency>
                 <groupId>org.apache.tomcat.embed</groupId>
                 <artifactId>tomcat-embed-core</artifactId>
-                <version>11.0.22</version> <!-- Security patching 11.0.21 from spring-boot-starter-web:4.0.6 -->
+                <version>11.0.23</version> <!-- Security patching 11.0.21 from spring-boot-starter-web:4.0.6 -->
             </dependency>
         </dependencies>
     </dependencyManagement>
