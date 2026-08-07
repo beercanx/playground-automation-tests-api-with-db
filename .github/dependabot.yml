@@ -10,6 +10,10 @@ updates:
     labels:
       - "github-actions"
       - "dependencies"
+    groups:
+      all-github-actions:
+        patterns:
+          - "*"
 
   # Maintain dependencies in Maven 
   - package-ecosystem: "maven"
@@ -19,3 +23,12 @@ updates:
     labels:
       - "maven"
       - "dependencies"
+    groups:
+      security-updates-maven-dependencies:
+        applies-to: security-updates
+        patterns:
+          - "*"
+      version-updates-maven-dependencies:
+        applies-to: version-updates
+        patterns:
+          - "*"
